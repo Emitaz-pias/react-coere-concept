@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const style = {
@@ -15,28 +15,30 @@ function App() {
   ];
   return (
     <div className="App">
-      {/* // how to apply style from variable */}
+      <header className="App-header">
+        {/* // how to apply style from variable */}
 
-      <h1 className="newbie" style={style}>
-        {" "}
-        my first heading with variable style
-      </h1>
-      {/* how to apply style inline */}
-      <h2 style={{ backgroundColor: "red" }}>
-        My second heading this is inline style
-      </h2>
-      <Person name="Mr. xenon" job="hosting"></Person>
-      <Person name="Mr.solimoddui" job="wash"></Person>
-      <Person name="shakil" job={works[3]}></Person>
-<Count></Count>
-   
+        <h1 className="newbie" style={style}>
+          {" "}
+          my first heading with variable style
+        </h1>
+        {/* how to apply style inline */}
+        <h2 style={{ backgroundColor: "red" }}>
+          My second heading this is inline style
+        </h2>
+        <Person name="Mr. xenon" job="hosting"></Person>
+        <Person name="Mr.solimoddui" job="wash"></Person>
+        <Person name="shakil" job={works[3]}></Person>
+        <Count></Count>
+        <User></User>
+
         {works.map((work) => (
           <li>{work}</li>
         ))}
-      {products.map((pd) => (
-        <Product product={pd}></Product>
-      ))}
-
+        {products.map((pd) => (
+          <Product product={pd}></Product>
+        ))}
+      </header>
     </div>
   );
 }
@@ -75,19 +77,33 @@ function Product(props) {
   );
 }
 function Count() {
-
-  const [count,setCount] = useState(0);
-  const handleDecrese =()=>{
-if(count>0){
-  setCount(count-1)
-}
-  }
+  const [count, setCount] = useState(0);
+  const handleDecrese = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
   return (
     <div>
       <h2>Count:{count}</h2>
-      <button onClick={ () => setCount(count+1)} >Increase</button>
+      <button onMouseMove={() => setCount(count + 1)}>Increase</button>
       <button onMouseMove={handleDecrese}>Decreese</button>
+    </div>
+  );
+}
+function User() {
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then(data=>setUsers(data))
+  }, []);
+  const [users, setUsers] = useState([]);
 
+  return(
+    <div>
+      {
+       users.map(usr=><h1>{usr.name}</h1>)
+      }
     </div>
   )
 }
