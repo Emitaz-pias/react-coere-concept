@@ -1,18 +1,18 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
   const style = {
     color: "red",
   };
-  const works = ["shalik", "monai", "kapor dhoua", "raing paila maja"];
+  const works = ["shalik", "monai", "kapor dhoua", "hari patil maja"];
   const products = [
     { name: "Photoshop", price: "200" },
     { name: "ilustrator", price: "455" },
     { name: "pdf reader", price: "6.77" },
     { name: "Premium Appss", price: "3433" },
   ];
-
   return (
     <div className="App">
       {/* // how to apply style from variable */}
@@ -28,16 +28,15 @@ function App() {
       <Person name="Mr. xenon" job="hosting"></Person>
       <Person name="Mr.solimoddui" job="wash"></Person>
       <Person name="shakil" job={works[3]}></Person>
-
-      <ul>
-        {" "}
+<Count></Count>
+   
         {works.map((work) => (
           <li>{work}</li>
         ))}
-      </ul>
       {products.map((pd) => (
         <Product product={pd}></Product>
       ))}
+
     </div>
   );
 }
@@ -74,6 +73,23 @@ function Product(props) {
       <button>Buy now</button>
     </div>
   );
+}
+function Count() {
+
+  const [count,setCount] = useState(0);
+  const handleDecrese =()=>{
+if(count>0){
+  setCount(count-1)
+}
+  }
+  return (
+    <div>
+      <h2>Count:{count}</h2>
+      <button onClick={ () => setCount(count+1)} >Increase</button>
+      <button onMouseMove={handleDecrese}>Decreese</button>
+
+    </div>
+  )
 }
 
 export default App;
