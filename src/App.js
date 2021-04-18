@@ -9,7 +9,8 @@ function App() {
   const products = [
     { name: "Photoshop", price: "200" },
     { name: "ilustrator", price: "455" },
-    {name:"pdf reader",price:"6.77"}
+    { name: "pdf reader", price: "6.77" },
+    { name: "Premium Appss", price: "3433" },
   ];
 
   return (
@@ -27,9 +28,16 @@ function App() {
       <Person name="Mr. xenon" job="hosting"></Person>
       <Person name="Mr.solimoddui" job="wash"></Person>
       <Person name="shakil" job={works[3]}></Person>
-      <Product name={products[0].name} price={products[0].price}></Product>
-      <Product product={products[1]} > </Product>
-      <Product></Product>
+
+      <ul>
+        {" "}
+        {works.map((work) => (
+          <li>{work}</li>
+        ))}
+      </ul>
+      {products.map((pd) => (
+        <Product product={pd}></Product>
+      ))}
     </div>
   );
 }
@@ -51,10 +59,18 @@ function Product(props) {
     margin: "10px",
     float: "left",
   };
+  const { name, price } = props.product;
   return (
     <div style={productStye}>
-      <h3>{props.name}</h3>
+      {/* <h3>{props.name}</h3>
       <h2>${props.price}</h2>
+      <button>Buy now</button> */}
+
+      {/*  witout destrcurting <h3>{props.product.name}</h3>
+      <h2>${props.product.price}</h2>
+      <button>Buy now</button> */}
+      <h3>{name}</h3>
+      <h2>${price}</h2>
       <button>Buy now</button>
     </div>
   );
